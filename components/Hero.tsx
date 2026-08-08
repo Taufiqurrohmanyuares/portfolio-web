@@ -7,8 +7,8 @@ import { Briefcase, FileText, Guitar, X } from "lucide-react";
 import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
 
 const socials = [
-  { icon: FiGithub, href: "https://github.com" },
-  { icon: FiInstagram, href: "https://instagram.com" },
+  { icon: FiGithub, href: "https://github.com/Taufiqurrohmanyuares" },
+  { icon: FiInstagram, href: "https://instagram.com/taufiqyrs_" },
   { icon: FiLinkedin, href: "https://www.linkedin.com/in/taufiqyuares/" },
 ];
 
@@ -130,7 +130,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="/cv.pdf"
+              href="/CV-taufiqurrohman Yuares.pdf"
               target="_blank"
               rel="noreferrer"
               onClick={() => setShowWonderwall(true)}
@@ -140,7 +140,7 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          {/* Easter egg — klasik "anyway, here's Wonderwall". Tombol dibuat lebih interaktif */}
+          {/* Easter egg — Tombol interaktif untuk lagu */}
           <motion.div variants={fadeUp} className="mt-6 w-fit">
             <motion.button
               type="button"
@@ -168,10 +168,10 @@ export default function Hero() {
 
               <div className="flex flex-col items-start">
                 <span className="text-slate-800 group-hover:text-indigo-600 text-sm font-bold leading-tight transition-colors">
-                  Anyway, here&apos;s Wonderwall
+                  Anyway, here&apos;s Whatever
                 </span>
                 <span className="text-slate-400 text-[11px] font-medium">
-                  {showWonderwall ? "Sedang diputar — klik untuk stop" : "Klik untuk dengerin"}
+                  {showWonderwall ? "Widget terbuka — klik untuk tutup" : "Klik untuk dengerin"}
                 </span>
               </div>
             </motion.button>
@@ -259,8 +259,8 @@ export default function Hero() {
             <div className="aspect-video w-full">
               <iframe
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/bx1Bh8ZvH84?autoplay=1&loop=1&playlist=bx1Bh8ZvH84"
-                title="Oasis - Wonderwall (Official Video)"
+                src="https://www.youtube.com/embed/BiCAYO2iOnc?loop=1&playlist=BiCAYO2iOnc"
+                title="Oasis - Whatever"
                 allow="autoplay; encrypted-media"
                 allowFullScreen
               />
@@ -268,7 +268,7 @@ export default function Hero() {
 
             <div className="px-3.5 py-2.5 flex items-center gap-2 text-white/70 text-[11px] font-medium">
               <Guitar size={13} className="text-indigo-400 flex-shrink-0" />
-              <span className="truncate">Now playing: Wonderwall</span>
+              <span className="truncate">Now playing: Whatever (Oasis)</span>
             </div>
           </motion.div>
         )}

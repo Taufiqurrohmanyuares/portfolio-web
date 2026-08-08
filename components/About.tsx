@@ -132,7 +132,7 @@ export default function About() {
           <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 md:gap-10">
             
             <a
-              href="/cv.pdf"
+              href="/CV-taufiqurrohman Yuares.pdf"
               target="_blank"
               rel="noreferrer"
               className="bg-[#1E293B] hover:bg-[#0F172A] text-white text-xs md:text-sm font-bold tracking-widest px-7 py-3.5 md:px-8 md:py-4 rounded-full inline-flex items-center gap-3 transition-colors shadow-lg"
