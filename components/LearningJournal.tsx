@@ -44,6 +44,33 @@ const certifications: Certification[] = [
     image: "/certs/vsga.jpg",
   },
   {
+    title: "Belajar Dasar Pemrograman Web",
+    issuer: "Dicoding Indonesia",
+    date: "13 Agu 2026",
+    desc: "Membahas tuntas dasar HTML dan CSS sebagai tiga fondasi pembuatan website.",
+    credentialId: "07Z6QKDORZQR",
+    link: "https://dicoding.com/certificates/07Z6QKDORZQR",
+    image: "/certs/dicoding-dasar-web.jpg", // Sesuaikan nama file
+  },
+  {
+    title: "Belajar Membuat Front-End Web untuk Pemula",
+    issuer: "Dicoding Indonesia",
+    date: "26 Agu 2026",
+    desc: "Membuat aplikasi front-end web yang interaktif serta memiliki fitur penyimpanan menggunakan web storage.",
+    credentialId: "2VX3V2VD4PYQ",
+    link: "https://dicoding.com/certificates/2VX3V2VD4PYQ",
+    image: "/certs/dicoding-frontend.jpg", // Sesuaikan nama file
+  },
+  {
+    title: "Belajar Dasar Pemrograman JavaScript",
+    issuer: "Dicoding Indonesia",
+    date: "26 Agu 2026",
+    desc: "Menguasai dasar JavaScript untuk pengembangan aplikasi web menggunakan Node.js.",
+    credentialId: "4EXGJ6121XRL",
+    link: "https://dicoding.com/certificates/4EXGJ6121XRL",
+    image: "/certs/dicoding-js.jpg", // Sesuaikan nama file
+  },
+  {
     title: "Pelatihan Digital Marketing Dasar",
     issuer: "Disparbud Kab. Karawang & Relawan TIK",
     date: "31 Okt 2025",

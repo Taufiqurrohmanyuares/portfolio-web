@@ -122,7 +122,7 @@ export default function About() {
             className="border-l-[3px] border-[#8B5CF6] pl-5 md:pl-6 mb-10"
           >
             <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-4">
-              Sebagai lulusan Informatika, saya memiliki minat yang besar untuk terus mengeksplorasi persimpangan antara pengembangan web dan analisis data. Saya menikmati proses membangun antarmuka yang fungsional, sekaligus memahami bagaimana data di belakangnya dapat diolah.
+              Sebagai lulusan S1 Informatika dari Universitas Singaperbangsa Karawang (IPK 3.89/4.00), saya memiliki ketertarikan mendalam pada titik temu antara rekayasa web dan analisis data. Saya menikmati proses perancangan antarmuka yang fungsional, sekaligus mengoptimalkan bagaimana data di balik sistem tersebut diolah dan dimanfaatkan.
             </p>
             <p className="text-slate-600 text-sm md:text-base leading-relaxed">
               Meskipun masih terus belajar dan berkembang, pengalaman saya sejauh ini mencakup pembuatan aplikasi web dengan framework modern serta penerapan algoritma machine learning (seperti K-Means dan AHC) menggunakan Python. Saya adalah pembelajar yang adaptif dan selalu antusias menghadapi tantangan teknis baru.
