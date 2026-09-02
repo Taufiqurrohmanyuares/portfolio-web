@@ -57,6 +57,18 @@ const projects: Project[] = [
     repo: "https://github.com/Taufiqurrohmanyuares/warung-keuangan.git", 
   },
   {
+    title: "Patungin",
+    category: "Web",
+    tags: ["NEXT.JS","SUPABASE", "TAILWIND CSS", "WEB APP"], 
+    desc: "Aplikasi split-bill cerdas berbasis web untuk membagi tagihan patungan dengan adil, cepat, dan presisi.",
+    fullDesc: "Platform web interaktif yang dirancang untuk mempermudah perhitungan pembagian tagihan bersama teman atau kolega. Dilengkapi fitur ekstraksi struk otomatis bertenaga AI Vision dan kalkulator proporsional untuk mendistribusikan harga item, pajak, biaya layanan, serta diskon secara akurat tanpa perlu menginstal aplikasi tambahan.",
+    problemStatement: "Menghitung patungan secara manual seringkali memicu kebingungan dan memakan waktu, terutama saat harus membagi beban pajak, service charge, dan diskon secara proporsional yang berisiko tidak adil atau merugikan salah satu pihak (nombok).",
+    impact: "Menghadirkan pengalaman berbagi tagihan yang transparan dan 100% adil, menghilangkan rasa canggung saat menagih pembayaran, serta menghemat waktu perhitungan berkat otomatisasi AI dan rekonsiliasi sisa pembulatan rupiah.",
+    image: "/project/patungin.jpg", 
+    link: "https://patungin-seven.vercel.app/",
+    repo: "https://github.com/Taufiqurrohmanyuares/patungin.git", 
+  },
+  {
     title: "NgajiOnline.id",
     category: "Web",
     tags: ["WEB APP", "EDUCATION", "PHP/JS"], // Silakan sesuaikan dengan bahasa pemrograman yang dipakai
