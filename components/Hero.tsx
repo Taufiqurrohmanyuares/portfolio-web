@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
-import { Briefcase, FileText, Guitar, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { Briefcase, FileText, Music } from "lucide-react";
 import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
 
 const socials = [
@@ -19,8 +19,20 @@ const fadeUp = {
 
 export default function Hero() {
   const cardRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [showWonderwall, setShowWonderwall] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // Mencoba autoplay saat komponen dimuat
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch((error) => {
+        console.log("Autoplay diblokir oleh browser sampai ada interaksi pengguna.", error);
+      });
+    }
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = cardRef.current;
@@ -33,6 +45,17 @@ export default function Hero() {
 
   const resetTilt = () => setTilt({ x: 0, y: 0 });
 
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
   return (
     <motion.section
       id="home"
@@ -41,6 +64,9 @@ export default function Hero() {
       variants={{ show: { transition: { staggerChildren: 0.1 } } }}
       className="relative py-20 md:py-28 bg-[#F8F9FF] border-b border-slate-200/80 overflow-hidden"
     >
+      {/* Audio Element Tersembunyi */}
+      <audio ref={audioRef} src="/TULUS - Teh Hijau.mp3" loop className="hidden" />
+
       {/* ================= BACKGROUND ANIMATED BLOBS ================= */}
       <motion.div
         animate={{
@@ -133,45 +159,50 @@ export default function Hero() {
               href="/CV-taufiqurrohman Yuares.pdf"
               target="_blank"
               rel="noreferrer"
-              onClick={() => setShowWonderwall(true)}
               className="bg-white border border-slate-200 text-slate-700 text-sm font-bold tracking-wide px-7 py-3.5 rounded-full flex items-center gap-2 hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5 shadow-sm hover:shadow-md transition-all duration-300"
             >
               <FileText size={17} /> Review CV
             </a>
           </motion.div>
 
-          {/* Easter egg — Tombol interaktif untuk lagu */}
+          {/* Tombol interaktif pengontrol lagu pengganti Widget */}
           <motion.div variants={fadeUp} className="mt-6 w-fit">
             <motion.button
               type="button"
-              onClick={() => setShowWonderwall((prev) => !prev)}
+              onClick={toggleAudio}
               whileHover={{ y: -2 }}
               className="group flex items-center gap-3 bg-white border border-slate-200 hover:border-indigo-300 rounded-2xl pl-3 pr-5 py-2.5 shadow-sm hover:shadow-md transition-all duration-300"
             >
-              <div className="relative w-10 h-10 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center flex-shrink-0 group-hover:bg-indigo-600 transition-colors duration-300">
-                <motion.span
-                  animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
-                  className="absolute inset-0 rounded-full bg-indigo-400"
-                />
-                <div className="relative flex items-end gap-[3px] h-4">
-                  {[0, 1, 2].map((i) => (
-                    <motion.span
-                      key={i}
-                      animate={{ height: ["30%", "100%", "45%", "80%", "30%"] }}
-                      transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
-                      className="w-[3px] rounded-full bg-indigo-500 group-hover:bg-white transition-colors duration-300"
-                    />
-                  ))}
-                </div>
+              <div className={`relative w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${isPlaying ? 'bg-indigo-600' : 'bg-indigo-50 border border-indigo-100 group-hover:bg-indigo-100'}`}>
+                {isPlaying && (
+                  <motion.span
+                    animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+                    className="absolute inset-0 rounded-full bg-indigo-400"
+                  />
+                )}
+                {isPlaying ? (
+                  <div className="relative flex items-end gap-[3px] h-4">
+                    {[0, 1, 2].map((i) => (
+                      <motion.span
+                        key={i}
+                        animate={{ height: ["30%", "100%", "45%", "80%", "30%"] }}
+                        transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
+                        className="w-[3px] rounded-full bg-white transition-colors duration-300"
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <Music size={16} className="text-indigo-500" />
+                )}
               </div>
 
               <div className="flex flex-col items-start">
-                <span className="text-slate-800 group-hover:text-indigo-600 text-sm font-bold leading-tight transition-colors">
-                  Anyway, here&apos;s Whatever
+                <span className={`text-sm font-bold leading-tight transition-colors ${isPlaying ? 'text-indigo-600' : 'text-slate-800'}`}>
+                  {isPlaying ? 'Now Playing: Teh Hijau' : 'Vibes Mode'}
                 </span>
                 <span className="text-slate-400 text-[11px] font-medium">
-                  {showWonderwall ? "Widget terbuka — klik untuk tutup" : "Klik untuk dengerin"}
+                  {isPlaying ? 'Klik untuk pause' : 'Klik untuk putar lagu'}
                 </span>
               </div>
             </motion.button>
@@ -234,45 +265,7 @@ export default function Hero() {
             </motion.div>
           </motion.div>
         </motion.div>
-
       </div>
-
-      {/* Mini player mengambang */}
-      <AnimatePresence>
-        {showWonderwall && (
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 260, damping: 22 }}
-            className="fixed bottom-5 right-5 z-[100] w-64 bg-slate-950 rounded-2xl overflow-hidden shadow-2xl border border-white/10"
-          >
-            <button
-              type="button"
-              onClick={() => setShowWonderwall(false)}
-              aria-label="Matikan musik"
-              className="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
-            >
-              <X size={14} />
-            </button>
-
-            <div className="aspect-video w-full">
-              <iframe
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/BiCAYO2iOnc?loop=1&playlist=BiCAYO2iOnc"
-                title="Oasis - Whatever"
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-              />
-            </div>
-
-            <div className="px-3.5 py-2.5 flex items-center gap-2 text-white/70 text-[11px] font-medium">
-              <Guitar size={13} className="text-indigo-400 flex-shrink-0" />
-              <span className="truncate">Now playing: Whatever (Oasis)</span>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.section>
   );
 }
