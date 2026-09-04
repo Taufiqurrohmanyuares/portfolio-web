@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Briefcase, FileText, Music } from "lucide-react";
+import { Briefcase, FileText, Music, SkipForward } from "lucide-react";
 import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
 
 const socials = [
@@ -17,22 +17,43 @@ const fadeUp = {
   show: { opacity: 1, y: 0 },
 };
 
+const playlist = [
+  { title: "Teh Hijau", src: "/TULUS - Teh Hijau.mp3" },
+  { title: "Foto Kita Blur", src: "/Foto kita blur - Sal Priadi (Lyrics).mp3" },
+  { title: "Overnight", src: "/Overnight - Kita Lewati Berdua.mp3" }
+];
+
 export default function Hero() {
   const cardRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isPlaying, setIsPlaying] = useState(false);
+  
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
 
-  // Mencoba autoplay saat komponen dimuat
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.play().then(() => {
         setIsPlaying(true);
       }).catch((error) => {
-        console.log("Autoplay diblokir oleh browser sampai ada interaksi pengguna.", error);
+        console.log("Autoplay diblokir oleh browser. Menunggu interaksi pengguna.", error);
       });
     }
-  }, []);
+  }, []); 
+
+  const playNextTrack = () => {
+    setCurrentTrackIndex((prevIndex) => {
+      return (prevIndex + 1) % playlist.length;
+    });
+  };
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+         audioRef.current.play().catch(e => console.log(e));
+      }
+    }
+  }, [currentTrackIndex, isPlaying]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = cardRef.current;
@@ -64,10 +85,13 @@ export default function Hero() {
       variants={{ show: { transition: { staggerChildren: 0.1 } } }}
       className="relative py-20 md:py-28 bg-[#F8F9FF] border-b border-slate-200/80 overflow-hidden"
     >
-      {/* Audio Element Tersembunyi */}
-      <audio ref={audioRef} src="/TULUS - Teh Hijau.mp3" loop className="hidden" />
+      <audio 
+        ref={audioRef} 
+        src={playlist[currentTrackIndex].src} 
+        onEnded={playNextTrack} 
+        className="hidden" 
+      />
 
-      {/* ================= BACKGROUND ANIMATED BLOBS ================= */}
       <motion.div
         animate={{
           y: [0, -20, 0],
@@ -89,7 +113,6 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-14 md:gap-20 relative z-10">
         
-        {/* ================= KOLOM TEKS (KIRI) ================= */}
         <div className="w-full md:w-auto md:max-w-xl">
           <motion.p
             variants={fadeUp}
@@ -165,8 +188,7 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          {/* Tombol interaktif pengontrol lagu pengganti Widget */}
-          <motion.div variants={fadeUp} className="mt-6 w-fit">
+          <motion.div variants={fadeUp} className="mt-6 flex items-center gap-3 w-fit">
             <motion.button
               type="button"
               onClick={toggleAudio}
@@ -197,19 +219,28 @@ export default function Hero() {
                 )}
               </div>
 
-              <div className="flex flex-col items-start">
-                <span className={`text-sm font-bold leading-tight transition-colors ${isPlaying ? 'text-indigo-600' : 'text-slate-800'}`}>
-                  {isPlaying ? 'Now Playing: Teh Hijau' : 'Vibes Mode'}
+              <div className="flex flex-col items-start w-32 truncate">
+                <span className={`text-sm font-bold leading-tight transition-colors truncate w-full text-left ${isPlaying ? 'text-indigo-600' : 'text-slate-800'}`}>
+                  {isPlaying ? playlist[currentTrackIndex].title : 'Vibes Mode'}
                 </span>
                 <span className="text-slate-400 text-[11px] font-medium">
                   {isPlaying ? 'Klik untuk pause' : 'Klik untuk putar lagu'}
                 </span>
               </div>
             </motion.button>
+            
+            <motion.button
+              type="button"
+              onClick={playNextTrack}
+              whileHover={{ y: -2 }}
+              className="w-11 h-11 bg-white border border-slate-200 hover:border-indigo-300 rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 text-slate-500 hover:text-indigo-600"
+              aria-label="Next Track"
+            >
+               <SkipForward size={18} />
+            </motion.button>
           </motion.div>
         </div>
 
-        {/* ================= KOLOM KARTU PROFIL (KANAN) ================= */}
         <motion.div
           animate={{ y: [-8, 8, -8] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}

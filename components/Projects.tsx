@@ -71,7 +71,7 @@ const projects: Project[] = [
   {
     title: "NgajiOnline.id",
     category: "Web",
-    tags: ["WEB APP", "EDUCATION", "PHP/JS"], // Silakan sesuaikan dengan bahasa pemrograman yang dipakai
+    tags: ["WEB APP", "EDUCATION", "python", "Django", "javascript"], // Silakan sesuaikan dengan bahasa pemrograman yang dipakai
     desc: "Platform pembelajaran membaca Al-Qur'an secara daring (online) yang fleksibel dan mudah diakses.",
     fullDesc: "Pengembangan sistem informasi pendidikan Ngajionline.id yang dirancang untuk memfasilitasi kegiatan belajar mengaji secara jarak jauh, mempertemukan pengajar (ustaz/ustazah) dan santri dalam satu platform digital.",
     problemStatement: "Keterbatasan waktu, jarak, dan akses untuk menemukan pengajar mengaji yang kompeten seringkali menjadi hambatan utama bagi masyarakat urban untuk belajar Al-Qur'an secara rutin.",
