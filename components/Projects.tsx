@@ -47,7 +47,7 @@ const projects: Project[] = [
   {
     title: "Warung Keuangan",
     category: "Web",
-    tags: ["NEXT.JS", "TAILWIND CSS", "WEB APP"], 
+    tags: ["NEXT.JS", "TAILWIND CSS", "WEB APP", "AI"], 
     desc: "Aplikasi pencatatan dan manajemen keuangan interaktif untuk mempermudah pemantauan arus kas.",
     fullDesc: "Platform web yang dirancang untuk membantu pengguna atau pemilik usaha kecil (warung) dalam mencatat pemasukan dan pengeluaran secara digital, praktis, dan real-time.",
     problemStatement: "Pencatatan keuangan secara manual seringkali rentan terhadap kesalahan perhitungan dan risiko hilangnya data, sehingga menyulitkan evaluasi arus kas.",
@@ -59,7 +59,7 @@ const projects: Project[] = [
   {
     title: "Patungin",
     category: "Web",
-    tags: ["NEXT.JS","SUPABASE", "TAILWIND CSS", "WEB APP"], 
+    tags: ["NEXT.JS","SUPABASE", "TAILWIND CSS", "AI", "WEB APP"], 
     desc: "Aplikasi split-bill cerdas berbasis web untuk membagi tagihan patungan dengan adil, cepat, dan presisi.",
     fullDesc: "Platform web interaktif yang dirancang untuk mempermudah perhitungan pembagian tagihan bersama teman atau kolega. Dilengkapi fitur ekstraksi struk otomatis bertenaga AI Vision dan kalkulator proporsional untuk mendistribusikan harga item, pajak, biaya layanan, serta diskon secara akurat tanpa perlu menginstal aplikasi tambahan.",
     problemStatement: "Menghitung patungan secara manual seringkali memicu kebingungan dan memakan waktu, terutama saat harus membagi beban pajak, service charge, dan diskon secara proporsional yang berisiko tidak adil atau merugikan salah satu pihak (nombok).",
