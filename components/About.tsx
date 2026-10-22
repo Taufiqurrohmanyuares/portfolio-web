@@ -31,8 +31,8 @@ export default function About() {
   const resetTilt = () => setTilt({ x: 0, y: 0 });
 
   return (
-    <section id="about" className="py-20 md:py-32 bg-white border-b border-slate-200/80 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+    <section id="about" className="relative flex min-h-dvh items-center bg-white py-20 md:py-32 border-b border-slate-200/80 overflow-hidden">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
         {/* Kolom Kiri: Foto & Badge */}
         <motion.div

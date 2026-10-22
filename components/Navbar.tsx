@@ -16,25 +16,52 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Scrollspy: tandai menu sesuai section yang sedang berada di tengah layar
+  useEffect(() => {
+    const ids = ["home", ...navLinks.map((l) => l.href.slice(1))];
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header className="fixed top-4 md:top-6 left-0 w-full z-50 px-4 flex justify-center">
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      className="pointer-events-none fixed top-4 md:top-6 left-0 w-full z-50 px-4 flex justify-center"
+    >
       {/* Pill navbar mengambang, tetap palet putih/slate/indigo seperti sebelumnya */}
       <div
-        className={`flex items-center gap-1 bg-white border border-slate-200/80 rounded-full pl-2 pr-2 py-2 md:pl-3 md:pr-2.5 md:py-2.5 transition-shadow duration-300 ${
+        className={`pointer-events-auto flex items-center gap-1 bg-white border border-slate-200/80 rounded-full pl-2 pr-2 py-2 md:pl-3 md:pr-2.5 md:py-2.5 transition-shadow duration-300 ${
           scrolled ? "shadow-lg shadow-slate-200/60" : "shadow-sm"
         }`}
       >
         {/* Logo / Inisial */}
         <Link
           href="#home"
-          className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-900 text-xs md:text-sm font-black tracking-tight flex-shrink-0"
+          className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-900 text-xs md:text-sm font-black tracking-tight flex-shrink-0 hover:border-indigo-300 hover:text-indigo-600 transition-colors"
         >
           TY
         </Link>
@@ -44,15 +71,27 @@ export default function Navbar() {
 
         {/* Desktop Nav Links */}
         <nav className="hidden md:flex items-center gap-1">
-          {navLinks.slice(0, -1).map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-xs font-bold text-slate-600 hover:text-indigo-600 uppercase tracking-wide px-3.5 py-2 rounded-full hover:bg-slate-50 transition-colors"
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.slice(0, -1).map((link) => {
+            const isActive = active === link.href.slice(1);
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`relative text-xs font-bold uppercase tracking-wide px-3.5 py-2 rounded-full transition-colors ${
+                  isActive ? "text-indigo-600" : "text-slate-600 hover:text-indigo-600"
+                }`}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-active"
+                    className="absolute inset-0 rounded-full bg-indigo-50"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative">{link.name}</span>
+              </a>
+            );
+          })}
         </nav>
 
         {/* CTA Pill */}
@@ -81,19 +120,24 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden absolute top-[68px] left-4 right-4 bg-white border border-slate-200/80 rounded-3xl px-6 py-5 flex flex-col gap-1 shadow-xl shadow-slate-200/60"
+            className="pointer-events-auto md:hidden absolute top-[68px] left-4 right-4 bg-white border border-slate-200/80 rounded-3xl px-6 py-5 flex flex-col gap-1 shadow-xl shadow-slate-200/60"
           >
-            {navLinks.map((link) => (
-              <a
+            {navLinks.map((link, i) => (
+              <motion.a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="text-sm font-bold text-slate-700 hover:text-indigo-600 uppercase tracking-wide py-2.5 transition-colors"
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.05 + i * 0.05, duration: 0.3 }}
+                className={`text-sm font-bold uppercase tracking-wide py-2.5 transition-colors ${
+                  active === link.href.slice(1) ? "text-indigo-600" : "text-slate-700 hover:text-indigo-600"
+                }`}
               >
                 {link.name}
-              </a>
+              </motion.a>
             ))}
-            
+
             <a
               href="#contact"
               onClick={() => setIsOpen(false)}
@@ -104,6 +148,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

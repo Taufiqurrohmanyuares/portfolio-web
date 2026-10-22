@@ -103,7 +103,7 @@ function ProjectCard({ p, index, onClick }: { p: Project; index: number; onClick
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
+      transition={{ duration: 0.6, delay: (index % 3) * 0.12, ease: "easeOut" }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
@@ -124,6 +124,7 @@ function ProjectCard({ p, index, onClick }: { p: Project; index: number; onClick
           src={p.image} 
           alt={p.title} 
           fill 
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-1" 
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/0 to-slate-900/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -184,21 +185,23 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   useEffect(() => {
-    if (selectedProject) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    if (!selectedProject) return;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedProject(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = "unset";
-    }
+      window.removeEventListener("keydown", onKeyDown);
+    };
   }, [selectedProject]);
 
   return (
-    <section id="projects" className="py-20 md:py-32 bg-[#F8F9FF] border-b border-slate-200/80 relative">
+    <section id="projects" className="relative flex min-h-dvh flex-col justify-center bg-[#F8F9FF] py-20 md:py-32 border-b border-slate-200/80">
       
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto mb-16 px-6 relative z-10">
+      <div className="w-full text-center max-w-2xl mx-auto mb-16 px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -240,7 +243,7 @@ export default function Projects() {
       </div>
 
       {/* Grid Cards Menggunakan Komponen Spotlight */}
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
         {projects.map((p, i) => (
           <ProjectCard key={p.title} p={p} index={i} onClick={() => setSelectedProject(p)} />
         ))}
@@ -283,6 +286,7 @@ export default function Projects() {
                     src={selectedProject.image} 
                     alt={selectedProject.title} 
                     fill 
+                    sizes="(max-width: 768px) 100vw, 672px"
                     className="object-cover opacity-70 group-hover:scale-105 group-hover:opacity-60 transition-all duration-700" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />

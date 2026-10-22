@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Briefcase, FileText, Music, SkipForward } from "lucide-react";
 import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
@@ -12,9 +12,14 @@ const socials = [
   { icon: FiLinkedin, href: "https://www.linkedin.com/in/taufiqyuares/" },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0 },
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
 };
 
 const playlist = [
@@ -30,6 +35,11 @@ export default function Hero() {
   const [isPlaying, setIsPlaying] = useState(false);
   
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+
+  // Konten hero naik dan memudar pelan saat di-scroll
+  const { scrollY } = useScroll();
+  const contentY = useTransform(scrollY, [0, 600], [0, -70]);
+  const contentOpacity = useTransform(scrollY, [0, 500], [1, 0.15]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -83,7 +93,7 @@ export default function Hero() {
       initial="hidden"
       animate="show"
       variants={{ show: { transition: { staggerChildren: 0.1 } } }}
-      className="relative py-20 md:py-28 bg-[#F8F9FF] border-b border-slate-200/80 overflow-hidden"
+      className="relative flex min-h-dvh w-full items-center bg-[#F8F9FF] py-24 border-b border-slate-200/80 overflow-hidden"
     >
       <audio 
         ref={audioRef} 
@@ -111,7 +121,10 @@ export default function Hero() {
         className="absolute bottom-10 left-10 md:left-40 w-72 h-72 bg-blue-300/20 rounded-full blur-3xl -z-10 pointer-events-none"
       />
 
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-14 md:gap-20 relative z-10">
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="max-w-7xl w-full mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-center gap-14 md:gap-20 relative z-10"
+      >
         
         <div className="w-full md:w-auto md:max-w-xl">
           <motion.p
@@ -296,6 +309,24 @@ export default function Hero() {
             </motion.div>
           </motion.div>
         </motion.div>
+      </motion.div>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 hidden justify-center md:flex">
+        <motion.a
+          href="#projects"
+          aria-label="Scroll ke proyek"
+          variants={fadeUp}
+          className="pointer-events-auto flex flex-col items-center gap-2 text-[11px] font-semibold tracking-widest text-slate-400 hover:text-indigo-600 transition-colors"
+        >
+          Scroll
+          <span className="flex h-9 w-5 justify-center rounded-full border-2 border-current pt-1.5">
+            <motion.span
+              animate={{ y: [0, 10, 0], opacity: [1, 0.2, 1] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              className="h-1.5 w-1 rounded-full bg-current"
+            />
+          </span>
+        </motion.a>
       </div>
     </motion.section>
   );

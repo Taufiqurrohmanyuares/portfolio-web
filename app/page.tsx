@@ -7,22 +7,25 @@ import Skills from "@/components/Skills";
 import LearningJournal from "@/components/LearningJournal";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { MotionProvider, ScrollProgress } from "@/components/MotionKit";
 
-
+// Semua section sudah full lebar, setinggi layar, dan punya animasi masing-masing
 export default function Home() {
   return (
-    <main className="max-w-6xl mx-auto px-6">
-      <Navbar />
-      <Hero />
-      <MarqueeBanner />
-      <Projects />
-      <About />
-      <Skills />
-      <LearningJournal />
-      <Contact />
-      <Footer />
+    <MotionProvider>
+      <ScrollProgress />
+      <main className="w-full">
+        <Navbar />
 
-
-    </main>
+        <Hero />
+        <MarqueeBanner />
+        <Projects />
+        <About />
+        <Skills />
+        <LearningJournal />
+        <Contact />
+        <Footer />
+      </main>
+    </MotionProvider>
   );
 }

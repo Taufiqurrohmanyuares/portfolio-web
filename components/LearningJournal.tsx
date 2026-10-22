@@ -138,13 +138,13 @@ export default function LearningJournal() {
     : certifications.slice(0, INITIAL_VISIBLE_COUNT);
 
   return (
-    <section id="journal" className="py-20 md:py-32 bg-white border-b border-slate-200/80">
+    <section id="journal" className="relative flex min-h-dvh flex-col justify-center bg-white py-20 md:py-32 border-b border-slate-200/80">
       <motion.div
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeUp}
-        className="text-center max-w-2xl mx-auto mb-16 px-6"
+        className="w-full text-center max-w-2xl mx-auto mb-16 px-6"
       >
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-bold uppercase tracking-wider mb-4">
           <Award size={14} /> Credential & Proof
@@ -160,7 +160,11 @@ export default function LearningJournal() {
               preserveAspectRatio="none"
               aria-hidden="true"
             >
-              <path
+              <motion.path
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
                 d="M2 7 C 60 2, 200 2, 258 7"
                 stroke="#4F46E5"
                 strokeWidth="5"
@@ -176,23 +180,32 @@ export default function LearningJournal() {
         </p>
       </motion.div>
 
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {visibleCertifications.map((item, i) => (
           <motion.div
             key={item.title}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: i * 0.1 }}
+            transition={{ delay: (i % 3) * 0.1 }}
             variants={fadeUp}
             className="aspect-[4/3] w-full"
             style={{ perspective: 1200 }}
           >
-            <button
-              type="button"
+            <div
+              role="button"
+              tabIndex={0}
+              aria-pressed={flipped[i]}
               onClick={() => toggleFlip(i)}
+              onKeyDown={(e) => {
+                if (e.target !== e.currentTarget) return;
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  toggleFlip(i);
+                }
+              }}
               aria-label={`Balik kartu ${item.title}`}
-              className="relative w-full h-full text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500 rounded-3xl"
+              className="relative block w-full h-full cursor-pointer text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500 rounded-3xl"
               style={{ transformStyle: "preserve-3d" }}
             >
               <motion.div
@@ -208,6 +221,7 @@ export default function LearningJournal() {
                 >
                   <img
                     src={item.image}
+                    loading="lazy"
                     alt={`Sertifikat ${item.title}`}
                     className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   />
@@ -252,19 +266,21 @@ export default function LearningJournal() {
                     <div className="flex items-center gap-1.5 text-slate-500 text-[10px] font-bold">
                       <RotateCw size={12} /> Tutup
                     </div>
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center justify-center gap-1.5 bg-white text-slate-900 text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors shadow-sm"
-                    >
-                      Verify <ExternalLink size={14} />
-                    </a>
+                    {item.link !== "#" && item.link !== "" && (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center justify-center gap-1.5 bg-white text-slate-900 text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-indigo-50 transition-colors shadow-sm"
+                      >
+                        Verify <ExternalLink size={14} />
+                      </a>
+                    )}
                   </div>
                 </div>
               </motion.div>
-            </button>
+            </div>
           </motion.div>
         ))}
       </div>

@@ -12,3 +12,9 @@ body {
   background-color: #f1faf4;
   color: #16261f;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

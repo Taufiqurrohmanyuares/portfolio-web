@@ -75,12 +75,12 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32 bg-white relative overflow-hidden">
+    <section id="contact" className="relative flex min-h-dvh items-center bg-white py-20 md:py-32 overflow-hidden">
 
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full blur-3xl opacity-50 -z-10 translate-x-1/3 -translate-y-1/3 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-50 rounded-full blur-3xl opacity-50 -z-10 -translate-x-1/3 translate-y-1/3 pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
         {/* Kolom Kiri: Informasi Kontak */}
         <motion.div
@@ -101,7 +101,11 @@ export default function Contact() {
                   preserveAspectRatio="none"
                   aria-hidden="true"
                 >
-                  <path
+                  <motion.path
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
                     d="M2 7 C 60 2, 200 2, 258 7"
                     stroke="#4F46E5"
                     strokeWidth="5"
