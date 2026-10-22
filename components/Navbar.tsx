@@ -60,7 +60,7 @@ export default function Navbar() {
       >
         {/* Logo / Inisial */}
         <Link
-          href="#home"
+          href="#Hero"
           className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-900 text-xs md:text-sm font-black tracking-tight flex-shrink-0 hover:border-indigo-300 hover:text-indigo-600 transition-colors"
         >
           TY
