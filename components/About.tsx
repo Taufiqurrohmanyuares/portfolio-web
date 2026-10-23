@@ -31,7 +31,7 @@ export default function About() {
   const resetTilt = () => setTilt({ x: 0, y: 0 });
 
   return (
-    <section id="about" className="relative flex min-h-dvh items-center bg-white py-20 md:py-32 border-b border-slate-200/80 overflow-hidden">
+    <section id="about" className="relative flex min-h-dvh items-center py-20 md:py-32 border-b border-white/10 overflow-hidden">
       <div className="w-full max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
         {/* Kolom Kiri: Foto & Badge */}
@@ -84,10 +84,10 @@ export default function About() {
                 transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
                 whileHover={{ scale: 1.05, rotate: -2 }}
                 style={{ transform: "translateZ(30px)" }}
-                className="absolute -bottom-6 -right-4 md:-right-8 bg-white px-6 py-5 rounded-2xl shadow-xl flex flex-col items-center justify-center border border-slate-100 min-w-[150px] cursor-default"
+                className="absolute -bottom-6 -right-4 md:-right-8 bg-[#0F1736] px-6 py-5 rounded-2xl shadow-xl shadow-black/40 flex flex-col items-center justify-center border border-white/15 min-w-[150px] cursor-default"
               >
-                <span className="text-3xl font-black text-[#3B82F6] mb-1">AI</span>
-                <span className="text-xs text-slate-600 text-center font-bold leading-snug">
+                <span className="font-display text-3xl font-extrabold text-[#6C8CFF] mb-1">AI</span>
+                <span className="text-xs text-white/70 text-center font-bold leading-snug">
                   Data Mining <br /> & Web Dev
                 </span>
               </motion.div>
@@ -104,14 +104,14 @@ export default function About() {
           className="lg:col-span-7 flex flex-col items-start pt-10 lg:pt-0"
         >
           <motion.div variants={fadeUp} className="mb-8">
-            <h2 className="text-xl md:text-2xl font-extrabold text-slate-800 leading-[2.2] md:leading-[2.5]">
+            <h2 className="text-xl md:text-2xl font-extrabold text-white leading-[2.2] md:leading-[2.5]">
               I AM{" "}
               {/* === NAMA DITAMBAHKAN DI SINI === */}
-              <span className="inline-block bg-[#3B82F6] text-white px-3 py-1.5 md:px-4 md:py-2 rounded-xl text-2xl sm:text-3xl md:text-4xl tracking-tight shadow-sm mx-1 mb-2 md:mb-0">
+              <span className="inline-block bg-white text-[#060C22] px-3 py-1.5 md:px-4 md:py-2 rounded-xl text-2xl sm:text-3xl md:text-4xl tracking-tight shadow-sm mx-1 mb-2 md:mb-0">
                 TAUFIQURROHMAN YUARES
               </span>
               <br className="hidden md:block" />
-              <span className="bg-[#10B981] text-white px-3 py-1 md:px-4 md:py-1.5 rounded-xl text-xl md:text-2xl tracking-tight shadow-sm inline-block mt-1">
+              <span className="bg-[#FFC53D] text-slate-900 px-3 py-1 md:px-4 md:py-1.5 rounded-xl text-xl md:text-2xl tracking-tight shadow-sm inline-block mt-1">
                 INFORMATICS STUDENT & DEV
               </span>
             </h2>
@@ -119,12 +119,12 @@ export default function About() {
 
          <motion.div 
             variants={fadeUp} 
-            className="border-l-[3px] border-[#8B5CF6] pl-5 md:pl-6 mb-10"
+            className="border-l-[3px] border-[#FFC53D] pl-5 md:pl-6 mb-10"
           >
-            <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-4">
+            <p className="text-white/70 text-sm md:text-base leading-relaxed mb-4">
               Sebagai lulusan S1 Informatika dari Universitas Singaperbangsa Karawang (IPK 3.89/4.00), saya memiliki ketertarikan mendalam pada titik temu antara rekayasa web dan analisis data. Saya menikmati proses perancangan antarmuka yang fungsional, sekaligus mengoptimalkan bagaimana data di balik sistem tersebut diolah dan dimanfaatkan.
             </p>
-            <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+            <p className="text-white/70 text-sm md:text-base leading-relaxed">
               Meskipun masih terus belajar dan berkembang, pengalaman saya sejauh ini mencakup pembuatan aplikasi web dengan framework modern serta penerapan algoritma machine learning (seperti K-Means dan AHC) menggunakan Python. Saya adalah pembelajar yang adaptif dan selalu antusias menghadapi tantangan teknis baru.
             </p>
           </motion.div>
@@ -135,10 +135,10 @@ export default function About() {
               href="/CV-taufiqurrohman Yuares.pdf"
               target="_blank"
               rel="noreferrer"
-              className="bg-[#1E293B] hover:bg-[#0F172A] text-white text-xs md:text-sm font-bold tracking-widest px-7 py-3.5 md:px-8 md:py-4 rounded-full inline-flex items-center gap-3 transition-colors shadow-lg"
+              className="bg-[#FFC53D] hover:bg-white text-[#060C22] text-sm font-bold px-7 py-3.5 md:px-8 md:py-4 rounded-full inline-flex items-center gap-3 transition-colors shadow-lg shadow-[#FFC53D]/15"
             >
               <Download size={18} />
-              DOWNLOAD CV
+              Download CV
             </a>
 
             <a
@@ -147,14 +147,14 @@ export default function About() {
               rel="noreferrer"
               className="group flex items-center gap-4 rounded-2xl transition-transform hover:-translate-y-0.5"
             >
-              <div className="w-12 h-12 bg-emerald-50 border border-emerald-100 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm group-hover:bg-emerald-500 transition-colors">
-                <MessageCircle size={20} className="text-emerald-600 group-hover:text-white transition-colors" />
+              <div className="w-12 h-12 bg-emerald-400/15 border border-emerald-300/30 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500 transition-colors">
+                <MessageCircle size={20} className="text-emerald-300 group-hover:text-white transition-colors" />
               </div>
               <div className="flex flex-col">
-                <span className="text-slate-900 text-base md:text-lg font-bold leading-tight mb-1 group-hover:text-emerald-600 transition-colors">
+                <span className="text-white text-base md:text-lg font-bold leading-tight mb-1 group-hover:text-[#FFC53D] transition-colors">
                   Chat via WhatsApp
                 </span>
-                <span className="text-slate-500 text-xs md:text-sm font-medium">
+                <span className="text-white/70 text-xs md:text-sm font-medium">
                   Balas cepat, biasanya dalam sehari
                 </span>
               </div>

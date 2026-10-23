@@ -1,16 +1,49 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  html {
+    color-scheme: dark; /* scrollbar & kontrol bawaan browser ikut gelap */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    background-color: #060c22;
+    color: #f3f5ff;
+  }
+
+  /* Semua judul memakai font display */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display), var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: #ffc53d;
+    color: #060c22;
+  }
 }
 
-body {
-  background-color: #f1faf4;
-  color: #16261f;
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Kanvas gelap: biru tinta + kisi tipis + pendar biru di pojok kanan atas.
+     Dipasang sekali di <body> supaya seluruh halaman satu latar yang menyatu. */
+  .bg-canvas {
+    background-color: #060c22;
+    background-image:
+      radial-gradient(900px 520px at 85% -4%, rgba(41, 83, 221, 0.38), transparent 70%),
+      linear-gradient(rgba(140, 165, 255, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(140, 165, 255, 0.07) 1px, transparent 1px);
+    background-size: auto, 48px 48px, 48px 48px;
+    background-repeat: no-repeat, repeat, repeat;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

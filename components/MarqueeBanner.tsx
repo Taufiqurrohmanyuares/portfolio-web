@@ -14,19 +14,19 @@ const items: { label: string; category: Category }[] = [
 
 const categoryStyles: Record<Category, { dot: string; border: string; hoverText: string }> = {
   web: {
-    dot: "bg-indigo-500",
-    border: "border-indigo-100 hover:border-indigo-300",
-    hoverText: "group-hover:text-indigo-600",
+    dot: "bg-[#4A75FF]",
+    border: "border-white/10 hover:border-[#4A75FF]/60",
+    hoverText: "group-hover:text-white",
   },
   data: {
-    dot: "bg-emerald-500",
-    border: "border-emerald-100 hover:border-emerald-300",
-    hoverText: "group-hover:text-emerald-600",
+    dot: "bg-emerald-400",
+    border: "border-white/10 hover:border-emerald-400/60",
+    hoverText: "group-hover:text-white",
   },
   identity: {
-    dot: "bg-slate-400",
-    border: "border-slate-200 hover:border-slate-300",
-    hoverText: "group-hover:text-slate-900",
+    dot: "bg-[#FFC53D]",
+    border: "border-white/10 hover:border-[#FFC53D]/60",
+    hoverText: "group-hover:text-white",
   },
 };
 
@@ -36,7 +36,7 @@ const COPIES = 4;
 
 export default function MarqueeBanner() {
   return (
-    <div className="relative w-full overflow-hidden border-b border-slate-200/80 bg-white py-6">
+    <div className="relative w-full overflow-hidden border-b border-white/10 bg-white/[0.03] py-6">
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes marquee-scroll {
           0% { transform: translateX(0); }
@@ -54,8 +54,8 @@ export default function MarqueeBanner() {
       `}} />
 
       {/* Efek Gradient Fade di Kiri & Kanan */}
-      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 md:w-32 bg-gradient-to-r from-white to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 md:w-32 bg-gradient-to-l from-white to-transparent" />
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 md:w-32 bg-gradient-to-r from-[#060C22] to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 md:w-32 bg-gradient-to-l from-[#060C22] to-transparent" />
 
       {/* Container Marquee: tag chip berwarna per kategori */}
       <div className="flex w-max animate-marquee items-center">
@@ -70,10 +70,10 @@ export default function MarqueeBanner() {
               return (
                 <span
                   key={item.label}
-                  className={`group flex cursor-default items-center gap-2 whitespace-nowrap rounded-full border ${s.border} bg-white px-4 py-2 transition-colors`}
+                  className={`group flex cursor-default items-center gap-2 whitespace-nowrap rounded-full border ${s.border} bg-white/5 px-4 py-2 transition-colors`}
                 >
                   <span className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${s.dot}`} />
-                  <span className={`text-xs md:text-sm font-bold tracking-wide text-slate-600 ${s.hoverText} transition-colors`}>
+                  <span className={`text-sm font-medium text-white/70 ${s.hoverText} transition-colors`}>
                     {item.label}
                   </span>
                 </span>

@@ -1,17 +1,28 @@
-import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google"; // 1. Import font dari Google
+import type { Metadata, Viewport } from "next";
+import { Bricolage_Grotesque, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 
-// 2. Konfigurasi font
-const jakarta = Plus_Jakarta_Sans({ 
+// Font display (judul): tegas dan berkarakter
+const display = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-jakarta", // Deklarasi variable CSS
+  variable: "--font-display",
+  display: "swap",
+});
+
+// Font isi (paragraf, tombol): bersih dan mudah dibaca di latar gelap
+const body = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Taufiqurrohman | Portfolio",
   description: "Fullstack Developer & AI Enthusiast Portfolio",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#060C22", // warna bar browser di HP mengikuti tema gelap
 };
 
 export default function RootLayout({
@@ -21,8 +32,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" className="scroll-smooth">
-      {/* 3. Masukkan variable font ke body */}
-      <body className={`${jakarta.className} bg-[#F8F9FF] text-slate-900 antialiased`}>
+      <body
+        className={`${display.variable} ${body.variable} min-h-dvh overflow-x-hidden bg-canvas text-white antialiased`}
+      >
         {children}
       </body>
     </html>

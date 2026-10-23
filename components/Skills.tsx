@@ -31,12 +31,12 @@ const skillsReversed = [...skills].reverse();
 
 const categoryStyles: Record<Category, { border: string; hoverText: string }> = {
   web: {
-    border: "hover:border-indigo-300",
-    hoverText: "group-hover:text-indigo-600",
+    border: "hover:border-[#4A75FF]/60",
+    hoverText: "group-hover:text-white",
   },
   data: {
-    border: "hover:border-emerald-300",
-    hoverText: "group-hover:text-emerald-600",
+    border: "hover:border-emerald-400/60",
+    hoverText: "group-hover:text-white",
   },
 };
 
@@ -67,14 +67,17 @@ function MarqueeRow({
             return (
               <div
                 key={skill.name}
-                className={`flex items-center gap-3 bg-white border border-slate-200 px-6 py-4 rounded-full mx-3 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:shadow-md ${s.border} transition-all cursor-pointer group`}
+                className={`flex items-center gap-3 bg-white/5 border border-white/10 pl-2.5 pr-5 py-2.5 rounded-full mx-3 ${s.border} transition-all cursor-pointer group`}
               >
-                {skill.icon ? (
-                  <img src={skill.icon} alt={skill.name} className="w-6 h-6 object-contain" />
-                ) : (
-                  <ChartNoAxesCombined size={22} className="text-emerald-600 flex-shrink-0" />
-                )}
-                <span className={`text-slate-800 font-semibold text-sm md:text-base whitespace-nowrap ${s.hoverText} transition-colors`}>
+                {/* Ikon diberi alas putih supaya logo berwarna gelap tetap terlihat */}
+                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white">
+                  {skill.icon ? (
+                    <img src={skill.icon} alt={skill.name} className="h-5 w-5 object-contain" />
+                  ) : (
+                    <ChartNoAxesCombined size={20} className="text-emerald-600" />
+                  )}
+                </span>
+                <span className={`text-white/90 font-medium text-sm md:text-base whitespace-nowrap ${s.hoverText} transition-colors`}>
                   {skill.name}
                 </span>
               </div>
@@ -90,7 +93,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative flex min-h-dvh flex-col justify-center bg-[#F8F9FF] py-24 border-b border-slate-200/80 overflow-hidden"
+      className="relative flex min-h-dvh flex-col justify-center py-24 border-b border-white/10 overflow-hidden"
     >
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes marquee-left {
@@ -136,12 +139,12 @@ export default function Skills() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="w-full max-w-2xl mx-auto px-6 text-center mb-16"
       >
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-bold uppercase tracking-wider mb-4">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-white/80 text-sm font-medium mb-4">
           <Sparkles size={14} /> Tools & Technologies
         </div>
-        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
           Tech{" "}
-          <span className="relative inline-block text-indigo-600">
+          <span className="relative inline-block text-[#FFC53D]">
             Skills.
             <svg
               className="absolute left-0 -bottom-1 w-full"
@@ -156,16 +159,16 @@ export default function Skills() {
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
                 d="M2 7 C 40 2, 160 2, 198 7"
-                stroke="#4F46E5"
+                stroke="#FFC53D"
                 strokeWidth="5"
                 fill="none"
                 strokeLinecap="round"
-                opacity="0.35"
+                opacity="0.85"
               />
             </svg>
           </span>
         </h2>
-        <p className="text-slate-600 text-base md:text-lg">
+        <p className="text-white/80 text-base md:text-lg">
           Kombinasi tools pengembangan web dan pengolahan data yang biasa saya gunakan sehari-hari.
         </p>
       </motion.div>
@@ -177,8 +180,8 @@ export default function Skills() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="relative flex w-full max-w-[100vw] flex-col gap-6"
       >
-        <div className="absolute top-0 left-0 w-24 md:w-48 h-full bg-gradient-to-r from-[#F8F9FF] to-transparent z-10 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-24 md:w-48 h-full bg-gradient-to-l from-[#F8F9FF] to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 left-0 w-24 md:w-48 h-full bg-gradient-to-r from-[#060C22] to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-24 md:w-48 h-full bg-gradient-to-l from-[#060C22] to-transparent z-10 pointer-events-none" />
 
         <MarqueeRow items={skills} direction="left" duration={35} />
         <MarqueeRow items={skillsReversed} direction="right" duration={42} />

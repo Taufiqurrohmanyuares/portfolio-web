@@ -52,22 +52,22 @@ export default function Navbar() {
       transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
       className="pointer-events-none fixed top-4 md:top-6 left-0 w-full z-50 px-4 flex justify-center"
     >
-      {/* Pill navbar mengambang, tetap palet putih/slate/indigo seperti sebelumnya */}
+      {/* Pill navbar mengambang (kaca gelap) */}
       <div
-        className={`pointer-events-auto flex items-center gap-1 bg-white border border-slate-200/80 rounded-full pl-2 pr-2 py-2 md:pl-3 md:pr-2.5 md:py-2.5 transition-shadow duration-300 ${
-          scrolled ? "shadow-lg shadow-slate-200/60" : "shadow-sm"
+        className={`pointer-events-auto flex items-center gap-1 bg-[#0C1432]/80 backdrop-blur-xl border border-white/10 rounded-full pl-2 pr-2 py-2 md:pl-3 md:pr-2.5 md:py-2.5 transition-shadow duration-300 ${
+          scrolled ? "shadow-lg shadow-black/50" : "shadow-sm shadow-black/30"
         }`}
       >
         {/* Logo / Inisial */}
         <Link
-          href="#Hero"
-          className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-900 text-xs md:text-sm font-black tracking-tight flex-shrink-0 hover:border-indigo-300 hover:text-indigo-600 transition-colors"
+          href="#home"
+          className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/5 border border-white/15 flex items-center justify-center text-white text-xs md:text-sm font-extrabold tracking-tight font-display flex-shrink-0 hover:border-[#FFC53D] hover:text-[#FFC53D] transition-colors"
         >
           TY
         </Link>
 
         {/* Divider */}
-        <div className="hidden md:block w-px h-6 bg-slate-200 mx-2" />
+        <div className="hidden md:block w-px h-6 bg-white/10 mx-2" />
 
         {/* Desktop Nav Links */}
         <nav className="hidden md:flex items-center gap-1">
@@ -77,14 +77,14 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className={`relative text-xs font-bold uppercase tracking-wide px-3.5 py-2 rounded-full transition-colors ${
-                  isActive ? "text-indigo-600" : "text-slate-600 hover:text-indigo-600"
+                className={`relative text-sm font-medium px-3.5 py-2 rounded-full transition-colors ${
+                  isActive ? "text-white" : "text-white/60 hover:text-white"
                 }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="nav-active"
-                    className="absolute inset-0 rounded-full bg-indigo-50"
+                    className="absolute inset-0 rounded-full bg-white/10"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -97,7 +97,7 @@ export default function Navbar() {
         {/* CTA Pill */}
         <a
           href="#contact"
-          className="hidden md:inline-flex items-center gap-1.5 bg-slate-900 hover:bg-indigo-600 text-white text-xs font-black uppercase tracking-wide px-4 py-2 rounded-full transition-colors ml-1"
+          className="hidden md:inline-flex items-center gap-1.5 bg-[#FFC53D] hover:bg-white text-[#060C22] text-sm font-bold px-4 py-2 rounded-full transition-colors ml-1"
         >
           Contact <ArrowDown size={13} strokeWidth={3} />
         </a>
@@ -105,7 +105,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden w-9 h-9 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-700 ml-1"
+          className="md:hidden w-9 h-9 rounded-full bg-white/5 border border-white/15 flex items-center justify-center text-white ml-1"
           aria-label="Toggle Menu"
           aria-expanded={isOpen}
         >
@@ -120,7 +120,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="pointer-events-auto md:hidden absolute top-[68px] left-4 right-4 bg-white border border-slate-200/80 rounded-3xl px-6 py-5 flex flex-col gap-1 shadow-xl shadow-slate-200/60"
+            className="pointer-events-auto md:hidden absolute top-[68px] left-4 right-4 bg-[#0C1432]/95 backdrop-blur-xl border border-white/10 rounded-3xl px-6 py-5 flex flex-col gap-1 shadow-2xl shadow-black/50"
           >
             {navLinks.map((link, i) => (
               <motion.a
@@ -130,8 +130,8 @@ export default function Navbar() {
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.05 + i * 0.05, duration: 0.3 }}
-                className={`text-sm font-bold uppercase tracking-wide py-2.5 transition-colors ${
-                  active === link.href.slice(1) ? "text-indigo-600" : "text-slate-700 hover:text-indigo-600"
+                className={`text-base font-medium py-2.5 transition-colors ${
+                  active === link.href.slice(1) ? "text-[#FFC53D]" : "text-white/80 hover:text-white"
                 }`}
               >
                 {link.name}
@@ -141,7 +141,7 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={() => setIsOpen(false)}
-              className="mt-2 inline-flex items-center justify-center gap-1.5 bg-slate-900 text-white text-xs font-black uppercase tracking-wide px-4 py-3 rounded-full"
+              className="mt-2 inline-flex items-center justify-center gap-1.5 bg-[#FFC53D] text-[#060C22] text-sm font-bold px-4 py-3 rounded-full"
             >
               Contact <ArrowDown size={13} strokeWidth={3} />
             </a>
